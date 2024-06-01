@@ -1,9 +1,9 @@
-import React from "react";
+import {
+    BPButtom,
+    BPIconButtom
+} from "./components/Button/index"
 
-export default function AutomaticPrefetchPlugin(props){
-    return (
-        <div>
-            hello
-        </div>
-    )
+export{
+    BPButtom,
+    BPIconButtom
 }
