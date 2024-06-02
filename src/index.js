@@ -1,9 +1,1 @@
-import {
-    BPButtom,
-    BPIconButtom
-} from "./components/Button/index"
-
-export{
-    BPButtom,
-    BPIconButtom
-}
+export * from './components/Requirements';
