@@ -3,6 +3,8 @@ import resolve from '@rollup/plugin-node-resolve';
 import external from 'rollup-plugin-peer-deps-external';
 import { terser } from 'rollup-plugin-terser';
 import postcss from 'rollup-plugin-postcss';
+import commonjs from "@rollup/plugin-commonjs"
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 export default [
   {
@@ -23,6 +25,11 @@ export default [
         plugins: [],
         minimize: true,
       }),
+      commonjs({
+        include: /node_modules/,
+        requireReturnsDefault: 'auto', // <---- this solves default issue
+      }),
+      nodeResolve(),
       babel({
         exclude: 'node_modules/**',
         presets: ['@babel/preset-react']
