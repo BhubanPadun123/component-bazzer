@@ -1,45 +1,89 @@
 {
   "name": "component-bazzer",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "A simple react component that accepts a list of password requirements and updates each as they are fulfilled",
   "main": "dist/index.js",
-  "module": "dist/index.es.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
-    "build": "rollup -c"
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
   },
-  "author": "Bhuban Padun",
-  "license": "MIT",
-  "devDependencies": {
-    "@babel/core": "^7.12.10",
-    "@babel/preset-react": "^7.12.10",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@storybook/addon-actions": "^6.1.16",
-    "@storybook/addon-essentials": "^6.1.16",
-    "@storybook/addon-links": "^6.1.16",
-    "@storybook/react": "^6.1.16",
-    "babel-loader": "^8.2.2",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "rollup": "^2.38.4",
-    "rollup-plugin-babel": "^4.4.0",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-postcss": "^4.0.0",
-    "rollup-plugin-terser": "^7.0.2"
+  "scripts": {
+    "start": "tsdx watch",
+    "semantic-release": "semantic-release",
+    "build": "tsdx build",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why",
+    "storybook": "start-storybook -p 6006 -s ./src",
+    "build-storybook": "build-storybook -s ./src",
+    "deploy":"netlify deploy --prod"
   },
   "peerDependencies": {
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react": ">=16"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "author": "Bhuban Padun",
+  "module": "dist/taskmonk-clock.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/taskmonk-clock.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/taskmonk-clock.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.19.3",
+    "@babel/preset-react": "^7.18.6",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/gitlab": "^9.5.1",
+    "@semantic-release/npm": "^9.0.1",
+    "@size-limit/preset-small-lib": "^8.1.0",
+    "@storybook/addon-essentials": "^6.5.12",
+    "@storybook/addon-info": "^5.3.21",
+    "@storybook/addon-links": "^6.5.12",
+    "@storybook/addons": "^6.5.12",
+    "@storybook/react": "^6.5.12",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
+    "babel-loader": "^8.2.5",
+    "husky": "^8.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-is": "^18.2.0",
+    "semantic-release": "^19.0.5",
+    "size-limit": "^8.1.0",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.4.0",
+    "typescript": "^4.8.4"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
-    "@mui/icons-material": "^5.15.19",
-    "@mui/material": "^5.15.19",
-    "@mui/styled-engine-sc": "^6.0.0-alpha.18",
-    "@rollup/plugin-commonjs": "^25.0.8",
-    "styled-components": "^6.1.11"
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@lourenci/react-kanban": "2.0.0",
+    "@mui/icons-material": "^5.10.11",
+    "@mui/lab": "^5.0.0-alpha.107",
+    "@mui/material": "^5.10.13",
+    "@mui/styles": "^5.10.14",
+    "@storybook/addon-docs": "^6.5.14",
+    "uuid": "^9.0.1"
   }
 }
