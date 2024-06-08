@@ -68,7 +68,7 @@ export function BPLogin(props) {
                     email: data.get('email'),
                     password:data.get('password')
                 }
-                onSubmit(formData)
+                onSubmit && onSubmit(formData)
             }else{
                 setState({...state,validate:{...state.validate,password:true}})
                 setTimeout(()=>{
@@ -132,7 +132,7 @@ export function BPLogin(props) {
                         <FormControlLabel
                             control={<Checkbox checked={state.checkedRemember} value="remember" color="primary" onChange={()=> {
                                 setState({...state,checkedRemember:!state.checkedRemember})
-                                onClickRemember(state.checkedRemember)
+                                onClickRemember && onClickRemember(state.checkedRemember)
                             }}  />}
                             label="Remember me"
                         />
@@ -146,19 +146,19 @@ export function BPLogin(props) {
                         </Button>
                         <Grid container>
                             <Grid item xs>
-                                <Link href="#" variant="body2" onClick={()=> onClickForgot()}>
+                                <Link href="#" variant="body2" onClick={()=> onClickForgot && onClickForgot()}>
                                     Forgot password?
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link href="#" variant="body2" onClick={()=> onClickSignup()}>
+                                <Link href="#" variant="body2" onClick={()=>  onClickSignup && onClickSignup()}>
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>
                         </Grid>
                     </Box>
                 </Box>
-                <Copyright sx={{ mt: 8, mb: 4 }} webLink={webLink} />
+                <Copyright sx={{ mt: 8, mb: 4 }} webLink={webLink && webLink} />
             </Container>
         </ThemeProvider>
     )
