@@ -2,16 +2,19 @@ import {
     BPButtom,
     BPIconButtom
 } from "./components/Button/index"
-import {BPMobileCard} from "./components/Card/mobileCard"
 import {BPLogin} from "./components/Login/index"
 import {BPSignUp} from "./components/Signup/index"
+import {BPCard,BPCardSecondary} from "./components/Card/index.tsx"
+import {BPTabs} from "./components/Tabs/index.tsx"
 
 
 export {
     BPButtom,
     BPIconButtom,
-    BPMobileCard,
     BPLogin,
-    BPSignUp
+    BPSignUp,
+    BPTabs,
+    BPCard,
+    BPCardSecondary
 }
 

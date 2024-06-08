@@ -67,7 +67,7 @@ export function BPSignUp(props) {
                         password:data.get('password'),
                         email:data.get("email")
                     }
-                    onSubmit(formData)
+                    onSubmit && onSubmit(formData)
                 } else {
                     setState({ ...state, validate: { ...state.validate, password: true } })
                     setTimeout(() => {
@@ -150,7 +150,7 @@ export function BPSignUp(props) {
                         <FormControlLabel
                             control={<Checkbox checked={state.isClickRemember} value="remember" color="primary" onClick={()=> {
                                 setState({...state,isClickRemember:!state.isClickRemember})
-                                isRemember(state.isClickRemember)
+                                isRemember && isRemember(state.isClickRemember)
                             }} />}
                             label="Remember me"
                         />
@@ -164,12 +164,12 @@ export function BPSignUp(props) {
                         </Button>
                         <Grid container>
                             <Grid item xs>
-                                <Link href="#" variant="body2" onClick={()=> onClickForgotPassword()}>
+                                <Link href="#" variant="body2" onClick={()=> onClickForgotPassword && onClickForgotPassword()}>
                                     Forgot password?
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link href="#" variant="body2" onClick={()=> createAccount()}>
+                                <Link href="#" variant="body2" onClick={()=> createAccount && createAccount()}>
                                     {"Already have account?"}
                                 </Link>
                             </Grid>
