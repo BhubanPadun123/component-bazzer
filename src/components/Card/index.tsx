@@ -60,7 +60,11 @@ interface BPCardProp {
     imgUrl: string,
     cardData: object,
     onCardView: (e: any) => void,
-    onCardAdd: (e: any) => void
+    onCardAdd: (e: any) => void,
+    buttonTitle: {
+        btn_1: string,
+        btn_2: string
+    }
 }
 export const BPCard: React.FC<BPCardProp> = (props) => {
     const theme = useTheme()
@@ -86,12 +90,16 @@ export const BPCard: React.FC<BPCardProp> = (props) => {
                 <Button variant='outlined' onClick={() => {
                     onCardView && onCardView(cardData)
                 }}>
-                    Add
+                    {
+                        props.buttonTitle && props.buttonTitle.btn_1 ? props.buttonTitle.btn_1 : "Click 1"
+                    }
                 </Button>
                 <Button variant='outlined' onClick={() => {
                     onCardAdd && onCardAdd(cardData)
                 }}>
-                    Add
+                    {
+                        props.buttonTitle && props.buttonTitle.btn_2 ? props.buttonTitle.btn_2 : "Click 2"
+                    }
                 </Button>
             </ButtonWrapper>
         </BPBox>
@@ -137,7 +145,7 @@ export const BPCardSecondary: React.FC<BPCardSecondaryProp> = (props) => {
             border: "2px solid #d995ed",
             ":hover": {
                 background: "#a1e3d0",
-                opacity: 0.4
+                opacity: 0.8
             },
             display: "flex",
             gap: "4px",
@@ -193,7 +201,7 @@ export const BPCardSecondary: React.FC<BPCardSecondaryProp> = (props) => {
                         background: "#c4b7c2",
                         borderRadius: "12px"
                     }}>
-                        <Typography variant="h6" sx={{ fontFamily: "monospace", fontWeight: 800, width: "100%", borderBottom: "2px solid red" }}>Aminities</Typography>
+                        <Typography variant="h6" sx={{ fontFamily: "monospace", fontWeight: 800, width: "100%", borderBottom: "1px solid #8a7371" }}>Aminities</Typography>
                         {propertyDetails ? propertyDetails : `Propperty details`}
                     </Typography>
                     <Typography sx={{
@@ -211,7 +219,7 @@ export const BPCardSecondary: React.FC<BPCardSecondaryProp> = (props) => {
                         background: "#c4b7c2",
                         borderRadius: "12px"
                     }}>
-                        <Typography variant="h6" sx={{ fontFamily: "monospace", fontWeight: 800, width: "100%", borderBottom: "2px solid red" }}>Address</Typography>
+                        <Typography variant="h6" sx={{ fontFamily: "monospace", fontWeight: 800, width: "100%", borderBottom: "1px solid #8a7371" }}>Address</Typography>
                         {addressDetails ? addressDetails : `Address Details`}
                     </Typography>
                 </Box>
@@ -239,7 +247,7 @@ export const BPCardSecondary: React.FC<BPCardSecondaryProp> = (props) => {
                         background: "#c4b7c2",
                         borderRadius: "12px"
                     }}>
-                        <Typography variant="h6" sx={{ fontFamily: "monospace", fontWeight: 800, width: "100%", borderBottom: "2px solid red" }}>About Room</Typography>
+                        <Typography variant="h6" sx={{ fontFamily: "monospace", fontWeight: 800, width: "100%", borderBottom: "1px solid #8a7371" }}>About Room</Typography>
                         {rentDetails ? rentDetails : 'Rent Details'}
                     </Typography>
                     <Typography sx={{
@@ -257,7 +265,7 @@ export const BPCardSecondary: React.FC<BPCardSecondaryProp> = (props) => {
                         background: "#c4b7c2",
                         borderRadius: "12px"
                     }}>
-                        <Typography variant="h6" sx={{ fontFamily: "monospace", fontWeight: 800, width: "100%", borderBottom: "2px solid red" }}>Status</Typography>
+                        <Typography variant="h6" sx={{ fontFamily: "monospace", fontWeight: 800, width: "100%", borderBottom: "1px solid #8a7371" }}>Status</Typography>
                         {rentStatus ? rentStatus : "Room Status"}
                     </Typography>
                 </Box>
@@ -286,7 +294,7 @@ export const BPCardSecondary: React.FC<BPCardSecondaryProp> = (props) => {
                         background: "#c4b7c2",
                         borderRadius: "12px"
                     }}>
-                        <Typography variant="h6" sx={{ fontFamily: "monospace", fontWeight: 800, width: "100%", borderBottom: "2px solid red" }}>Owner</Typography>
+                        <Typography variant="h6" sx={{ fontFamily: "monospace", fontWeight: 800, width: "100%", borderBottom: "1px solid #8a7371" }}>Owner</Typography>
                         {ownerDatails ? ownerDatails : 'Property owner Details'}
                     </Typography>
                     <Typography sx={{
@@ -304,7 +312,7 @@ export const BPCardSecondary: React.FC<BPCardSecondaryProp> = (props) => {
                         background: "#c4b7c2",
                         borderRadius: "12px"
                     }}>
-                        <Typography variant="h6" sx={{ fontFamily: "monospace", fontWeight: 800, width: "100%", borderBottom: "2px solid red" }}>Amount</Typography>
+                        <Typography variant="h6" sx={{ fontFamily: "monospace", fontWeight: 800, width: "100%", borderBottom: "1px solid #8a7371" }}>Amount</Typography>
                         {amountDetail ? amountDetail : "Rent amount detailsfsdfsd dwfsdf dsfsd fdf"}
                     </Typography>
                 </Box>
@@ -312,10 +320,11 @@ export const BPCardSecondary: React.FC<BPCardSecondaryProp> = (props) => {
                     width: "100%",
                     display: "flex",
                     flexDirection: 'row',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    gap:"8px"
                 }}>
                     <Typography >
-                        <Button variant="outlined"
+                        <Button variant="contained"
                             onClick={() => {
                                 onButtonClick && onButtonClick.onClickBtn_1(metaData)
                             }}
@@ -324,12 +333,12 @@ export const BPCardSecondary: React.FC<BPCardSecondaryProp> = (props) => {
                         </Button>
                     </Typography>
                     <Typography >
-                        <Button variant="outlined"
+                        <Button variant="contained"
                             onClick={() => {
                                 onButtonClick && onButtonClick.onClickBtn_2(metaData)
                             }}
                         >
-                            btnText={buttonTitle && buttonTitle.btn_2 ? buttonTitle.btn_2 : "Add Card"}
+                            {buttonTitle && buttonTitle.btn_2 ? buttonTitle.btn_2 : "Add Card"}
                         </Button>
                     </Typography>
                 </Box>
