@@ -1,4 +1,4 @@
-import React,{ReactNode} from "react";
+import React, { ReactNode } from "react";
 import {
     Paper,
     Typography,
@@ -18,7 +18,7 @@ interface Town {
 
 interface TabData {
     tabLabel: string;
-    tabSubValue: Record<string, any>; // or use a more specific type if you know the structure of tabSubValue
+    tabSubValue: string[]
 }
 
 interface KeyPoint {
@@ -33,26 +33,35 @@ interface ContentData {
 
 
 interface BPProductRegisterCardProp {
-    townList: Town;
-    tabData: TabData;
+    dropDownList: Town[];
+    tabListData: TabData[];
     contentData: ContentData;
-    onSubmit: () => void;
+    onSubmit: (e:any) => void;
 }
 export const BPProductRegisterCard: React.FC<BPProductRegisterCardProp> = (props) => {
-    const {} = props
+    const {
+        dropDownList,
+        tabListData,
+        contentData,
+        onSubmit
+    } = props
     const theme = useTheme()
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'))
 
     const [state, setState] = React.useState({
         currentTabValue: "",
-        subTabValue:"",
-        selectedTown:"",
-        name:"",
-        email:"",
-        mobileNumber:"",
-        isCheckWhatsapp:false
+        subTabValue: "",
+        selectedTown: "",
+        name: "",
+        email: "",
+        mobileNumber: "",
+        isCheckWhatsapp: false
     })
-    const tabData = [
+
+    const handleSubmit=()=>{
+        onSubmit && onSubmit(JSON.stringify(state))
+    }
+    const tabData = tabListData ? tabListData : [
         {
             tabLabel: "Residential",
             tabSubValue: ["Rent", "Resale", "PG/Hostel", "Flatmates"],
@@ -66,34 +75,34 @@ export const BPProductRegisterCard: React.FC<BPProductRegisterCardProp> = (props
             tabSubValue: ["Rent", "Rent for condition", "Sale"]
         }
     ]
-    const townList= [
+    const townList = dropDownList ? dropDownList : [
         {
-            name:"Jonai",
-            lavel:"Jonai"
+            name: "Jonai",
+            lavel: "Jonai"
         },
         {
-            name:"Silapother",
-            lavel:"Silapother"
+            name: "Silapother",
+            lavel: "Silapother"
         },
         {
-            name:"Pasighat",
-            lavel:"Pasighat"
+            name: "Pasighat",
+            lavel: "Pasighat"
         },
         {
-            name:"Simen chapori",
-            lavel:"Simen chapori"
+            name: "Simen chapori",
+            lavel: "Simen chapori"
         },
         {
-            name:"Dhemaji",
-            lavel:"Dhemaji"
+            name: "Dhemaji",
+            lavel: "Dhemaji"
         },
         {
-            name:"Dibrughar",
-            lavel:"Dibrughar"
+            name: "Dibrughar",
+            lavel: "Dibrughar"
         },
         {
-            name:"Dhemaji",
-            lavel:"Dhemaji"
+            name: "Dhemaji",
+            lavel: "Dhemaji"
         }
     ]
     return (
@@ -114,62 +123,103 @@ export const BPProductRegisterCard: React.FC<BPProductRegisterCardProp> = (props
                 justifyContent: 'center',
                 alignItems: "center"
             }}>
-                <Typography variant={isSmallScreen ? 'h4' : "h6"} sx={{
-                    fontFamily: "Lato",
-                    fontWeight: 600,
-                    fontStyle: "normal",
-                    width: "100%",
-                    textAlign: "center"
-                }}>
-                    Why Post through us?
-                </Typography>
-                <Typography sx={{
-                    display: "flex",
-                    width: "60%",
-                    justifyContent: "space-around",
-                    // gap:"8px",
-                    textAlign: 'center'
-                }}>
-                    <AccountBalanceWallet />
-                    <span style={{
-                        fontSize: isSmallScreen ? "20px" : "12px",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        fontFamily: "Lato"
-                    }}>Zero Brokerage</span>
-                </Typography>
-                <Typography sx={{
-                    display: "flex",
-                    width: "60%",
-                    justifyContent: "space-around",
-                    // gap:"8px",
-                    textAlign: 'center'
-                }}>
-                    <ContactMailOutlined />
-                    <span style={{
-                        fontSize: isSmallScreen ? "20px" : "12px",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        fontFamily: "Lato"
-                    }}>Faster Tenants</span>
-                </Typography>
-                <Typography sx={{
-                    display: "flex",
-                    width: "60%",
-                    justifyContent: "space-around",
-                    // gap:"8px",
-                    textAlign: 'center'
-                }}>
-                    <AccountBalanceWallet />
-                    <span style={{
-                        fontSize: isSmallScreen ? "20px" : "12px",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        fontFamily: "Lato",
-                        wordBreak: 'break-word',
-                        width: "50%"
-                    }}>10 lac tenants/buyers connections</span>
-                </Typography>
+                {
+                    contentData ? (
+                        <React.Fragment>
+                            <Typography variant={isSmallScreen ? 'h4' : "h6"} sx={{
+                                fontFamily: "Lato",
+                                fontWeight: 600,
+                                fontStyle: "normal",
+                                width: "100%",
+                                textAlign: "center"
+                            }}>
+                                {contentData.headerTitle}
+                            </Typography>
+                            {
+                                contentData.keyPoint && Array.isArray(contentData.keyPoint) && contentData.keyPoint.length > 0 && 
+                                contentData.keyPoint.map((item,index)=> (
+                                    <Typography key={index} sx={{
+                                        display: "flex",
+                                        width: "60%",
+                                        justifyContent: "space-around",
+                                        // gap:"8px",
+                                        textAlign: 'center'
+                                    }}>
+                                        {
+                                            item.icon
+                                        }
+                                        <span style={{
+                                            fontSize: isSmallScreen ? "20px" : "12px",
+                                            fontStyle: "normal",
+                                            fontWeight: 400,
+                                            fontFamily: "Lato"
+                                        }}>{item.title}</span>
+                                    </Typography>
+                                ))
+                            }
+                        </React.Fragment>
+                    ) : (
+                        <React.Fragment>
+                            <Typography variant={isSmallScreen ? 'h4' : "h6"} sx={{
+                                fontFamily: "Lato",
+                                fontWeight: 600,
+                                fontStyle: "normal",
+                                width: "100%",
+                                textAlign: "center"
+                            }}>
+                                Why Post through us?
+                            </Typography>
+                            <Typography sx={{
+                                display: "flex",
+                                width: "60%",
+                                justifyContent: "space-around",
+                                // gap:"8px",
+                                textAlign: 'center'
+                            }}>
+                                <AccountBalanceWallet />
+                                <span style={{
+                                    fontSize: isSmallScreen ? "20px" : "12px",
+                                    fontStyle: "normal",
+                                    fontWeight: 400,
+                                    fontFamily: "Lato"
+                                }}>Zero Brokerage</span>
+                            </Typography>
+                            <Typography sx={{
+                                display: "flex",
+                                width: "60%",
+                                justifyContent: "space-around",
+                                // gap:"8px",
+                                textAlign: 'center'
+                            }}>
+                                <ContactMailOutlined />
+                                <span style={{
+                                    fontSize: isSmallScreen ? "20px" : "12px",
+                                    fontStyle: "normal",
+                                    fontWeight: 400,
+                                    fontFamily: "Lato"
+                                }}>Faster Tenants</span>
+                            </Typography>
+                            <Typography sx={{
+                                display: "flex",
+                                width: "60%",
+                                justifyContent: "space-around",
+                                // gap:"8px",
+                                textAlign: 'center'
+                            }}>
+                                <AccountBalanceWallet />
+                                <span style={{
+                                    fontSize: isSmallScreen ? "20px" : "12px",
+                                    fontStyle: "normal",
+                                    fontWeight: 400,
+                                    fontFamily: "Lato",
+                                    wordBreak: 'break-word',
+                                    width: "50%"
+                                }}>10 lac tenants/buyers connections</span>
+                            </Typography>
+                        </React.Fragment>
+                    )
+                }
+
             </Paper>
             <Paper
                 sx={{
@@ -197,11 +247,11 @@ export const BPProductRegisterCard: React.FC<BPProductRegisterCardProp> = (props
                         }}
                         placeholder="Name"
                         value={state.name}
-                        onChange={(e)=> {
-                            setState((prevState)=> {
+                        onChange={(e) => {
+                            setState((prevState) => {
                                 return {
                                     ...prevState,
-                                    name:e.target.value
+                                    name: e.target.value
                                 }
                             })
                         }}
@@ -213,11 +263,11 @@ export const BPProductRegisterCard: React.FC<BPProductRegisterCardProp> = (props
                         }}
                         placeholder="Email"
                         value={state.email}
-                        onChange={(e)=> {
-                            setState((prevState)=> {
+                        onChange={(e) => {
+                            setState((prevState) => {
                                 return {
                                     ...prevState,
-                                    email:e.target.value
+                                    email: e.target.value
                                 }
                             })
                         }}
@@ -241,11 +291,11 @@ export const BPProductRegisterCard: React.FC<BPProductRegisterCardProp> = (props
                         }}
                         placeholder="Mobile Number"
                         value={state.mobileNumber}
-                        onChange={(e)=> {
-                            setState((prevState)=> {
+                        onChange={(e) => {
+                            setState((prevState) => {
                                 return {
                                     ...prevState,
-                                    mobileNumber:e.target.value
+                                    mobileNumber: e.target.value
                                 }
                             })
                         }}
@@ -256,19 +306,19 @@ export const BPProductRegisterCard: React.FC<BPProductRegisterCardProp> = (props
                             width: isSmallScreen ? "80%" : "40%",
                         }}
                         value={state.selectedTown}
-                        onChange={(e)=> {
-                            setState((prevState)=> {
+                        onChange={(e) => {
+                            setState((prevState) => {
                                 return {
                                     ...prevState,
-                                    selectedTown:e.target.value
+                                    selectedTown: e.target.value
                                 }
                             })
                         }}
                     >
-                        <option value={"none"} label={"none"} style={{fontFamily:"Lato",fontStyle:"normal",fontWeight:400 }} />
+                        <option value={"none"} label={"none"} style={{ fontFamily: "Lato", fontStyle: "normal", fontWeight: 400 }} />
                         {
-                            townList.map((t,index)=> (
-                                <option value={t.name} label={t.lavel} key={index} style={{background:index % 2 === 0 ? "#967f3e" : "#7ed6bc",fontFamily:"Lato",fontStyle:"normal",fontWeight:400 }} />
+                            townList.map((t, index) => (
+                                <option value={t.name} label={t.lavel} key={index} style={{ background: index % 2 === 0 ? "#967f3e" : "#7ed6bc", fontFamily: "Lato", fontStyle: "normal", fontWeight: 400 }} />
                             ))
                         }
                     </select>
@@ -290,11 +340,11 @@ export const BPProductRegisterCard: React.FC<BPProductRegisterCardProp> = (props
                         WhatsApp
                     </span>
                     <WhatsApp sx={{ color: "green" }} />
-                    <Checkbox onChange={()=> {
-                        setState((prevState)=> {
+                    <Checkbox onChange={() => {
+                        setState((prevState) => {
                             return {
                                 ...prevState,
-                                isCheckWhatsapp:!state.isCheckWhatsapp
+                                isCheckWhatsapp: !state.isCheckWhatsapp
                             }
                         })
                     }} />
@@ -321,7 +371,7 @@ export const BPProductRegisterCard: React.FC<BPProductRegisterCardProp> = (props
                     }}>
                         <Tabs
                             value={state.currentTabValue ? state.currentTabValue : tabData[0].tabLabel}
-                            onChange={(event:any, newValue) => {
+                            onChange={(event: any, newValue) => {
                                 console.log(event)
                                 setState((prevState) => {
                                     return {
@@ -346,7 +396,7 @@ export const BPProductRegisterCard: React.FC<BPProductRegisterCardProp> = (props
                                             fontFamily: "Lato",
                                             fontWeight: 600,
                                             fontStyle: "normal",
-                                            background:state.currentTabValue === item.tabLabel ? "green" : ""
+                                            background: state.currentTabValue === item.tabLabel ? "green" : ""
                                         }}
                                     />
                                 ))
@@ -360,12 +410,12 @@ export const BPProductRegisterCard: React.FC<BPProductRegisterCardProp> = (props
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
-                        flexDirection:"column"
+                        flexDirection: "column"
                     }}>
                         <Typography sx={{
-                            fontFamily:"Lato",
-                            fontStyle:"normal",
-                            fontWeight:700
+                            fontFamily: "Lato",
+                            fontStyle: "normal",
+                            fontWeight: 700
                         }}>
                             Select Property Ad Type
                         </Typography>
@@ -375,33 +425,33 @@ export const BPProductRegisterCard: React.FC<BPProductRegisterCardProp> = (props
                                     return (
                                         <div>
                                             <Tabs
-                                              value={state.subTabValue ? state.subTabValue : tabData[0].tabSubValue[0]}
-                                              onChange={(event:any,newVal)=> {
-                                                console.log(event)
-                                                setState((prevState)=> {
-                                                    return {
-                                                        ...prevState,
-                                                        subTabValue:newVal
-                                                    }
-                                                })
-                                              }}
+                                                value={state.subTabValue ? state.subTabValue : tabData[0].tabSubValue[0]}
+                                                onChange={(event: any, newVal) => {
+                                                    console.log(event)
+                                                    setState((prevState) => {
+                                                        return {
+                                                            ...prevState,
+                                                            subTabValue: newVal
+                                                        }
+                                                    })
+                                                }}
                                             >
                                                 {
                                                     item.tabSubValue.map((subValue, index) => (
-                                                    <Tab 
-                                                      sx={{ 
-                                                        border:"2px solid #f5d889",
-                                                        ":hover":{background:"yellow"},
-                                                        fontFamily:"Lato",
-                                                        fontStyle:"normal",
-                                                        color:"white",
-                                                        background:state.subTabValue === subValue ? "yellow" : ""
-                                                    }} 
-                                                    label={subValue}
-                                                     value={subValue} 
-                                                     key={index} 
-                                                    />
-                                                ))
+                                                        <Tab
+                                                            sx={{
+                                                                border: "2px solid #f5d889",
+                                                                ":hover": { background: "yellow" },
+                                                                fontFamily: "Lato",
+                                                                fontStyle: "normal",
+                                                                color: "white",
+                                                                background: state.subTabValue === subValue ? "yellow" : ""
+                                                            }}
+                                                            label={subValue}
+                                                            value={subValue}
+                                                            key={index}
+                                                        />
+                                                    ))
                                                 }
                                             </Tabs>
                                         </div>
@@ -417,7 +467,9 @@ export const BPProductRegisterCard: React.FC<BPProductRegisterCardProp> = (props
                     padding: "10px",
                     marginTop: "10px"
                 }}>
-                    <Button variant="outlined" sx={{ background: "#e3324a linear-gradient(90deg, #fd3752, #fd3752)", color: "white" }}>
+                    <Button variant="outlined" sx={{ background: "#e3324a linear-gradient(90deg, #fd3752, #fd3752)", color: "white" }}
+                      onClick={handleSubmit}
+                    >
                         Start Posting Your Ad For Free
                     </Button>
                 </div>
@@ -425,22 +477,3 @@ export const BPProductRegisterCard: React.FC<BPProductRegisterCardProp> = (props
         </Paper>
     )
 }
-
-// BPProductRegisterCard.propTypes = {
-//     townList:PropTypes.shape({
-//         name:PropTypes.string,
-//         lavel:PropTypes.string
-//     }),
-//     tabData:PropTypes.shape({
-//         tabLabel:PropTypes.string,
-//         tabSubValue:PropTypes.object
-//     }),
-//     contentData:PropTypes.shape({
-//         headerTitle:PropTypes.string,
-//         keyPoint:PropTypes.arrayOf(PropTypes.shape({
-//             icon:PropTypes.node,
-//             title:PropTypes.string
-//         }))
-//     }),
-//     onSubmit:PropTypes.func
-// }

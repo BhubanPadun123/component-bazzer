@@ -59,6 +59,8 @@ const SelectField = styled('select')<SelectFieldTypeProp>((props) => ({
     fontSize: "16px",
     fontFamily: "Lato",
     fontStyle: "normal",
+    fontWeight: 400,
+    letterSpacing: 2.5
 }))
 const OptionField = styled('option')(() => ({
     fontFamily:"Lato",
@@ -99,7 +101,7 @@ export const BPPropertyRegisterForm: React.FC<BPPropertyRegisterFormProp> = (pro
                 value:data.get(`${item.labelName}`)?data.get(`${item.labelName}`) : ""
             })            
         })
-        props.onSubmit && props.onSubmit(formData)
+        props.onSubmit && props.onSubmit(responseData)
     }
 
     return (
