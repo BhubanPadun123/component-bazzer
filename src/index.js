@@ -6,6 +6,8 @@ import {BPLogin} from "./components/Login/index"
 import {BPSignUp} from "./components/Signup/index"
 import {BPCard,BPCardSecondary} from "./components/Card/index.tsx"
 import {BPTabs} from "./components/Tabs/index.tsx"
+import {BPProductRegisterCard} from "./components/Card/productCard.tsx"
+import {BPPropertyRegisterForm} from "./components/Form/PropertyRegisterForm.tsx"
 
 
 export {
@@ -15,6 +17,8 @@ export {
     BPSignUp,
     BPTabs,
     BPCard,
-    BPCardSecondary
+    BPCardSecondary,
+    BPProductRegisterCard,
+    BPPropertyRegisterForm
 }
 
