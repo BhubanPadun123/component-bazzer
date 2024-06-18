@@ -109,6 +109,9 @@ export const BPPropertyRegisterForm: React.FC<BPPropertyRegisterFormProp> = (pro
             isSmallScreen={isSmallScreen}
             component={"form"}
             onSubmit={handleSubmit}
+            style={{
+                minWidth:isSmallScreen?"90%" : "60%"
+            }}
         >
             <Typography sx={{
                 fontSize: "20px",

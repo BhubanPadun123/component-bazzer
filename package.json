@@ -1,6 +1,6 @@
 {
   "name": "component-bazzer",
-  "version": "1.8.1",
+  "version": "1.9.1",
   "description": "A simple react component that accepts a list of password requirements and updates each as they are fulfilled",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
