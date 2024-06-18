@@ -108,11 +108,10 @@ export const BPProductRegisterCard: React.FC<BPProductRegisterCardProp> = (props
     return (
         <Paper sx={{
             display: "flex",
-            //justifyContent: "center",
-            // alignItems: "center",
             flexDirection: isSmallScreen ? "column" : "row",
             border: "1px solid #e2e2e2",
-            maxWidth: "1090px"
+            maxWidth: "1090px",
+            minWidth:isSmallScreen ? "90%" : "60%"
         }}>
             <Paper sx={{
                 width: isSmallScreen ? "100%" : "30%",
@@ -356,7 +355,8 @@ export const BPProductRegisterCard: React.FC<BPProductRegisterCardProp> = (props
                     justifyContent: "center",
                     alignItems: "center",
                     gap: "8px",
-                    width: "100%"
+                    width: "100%",
+                    overflowX:"scroll"
                 }}>
                     <Typography variant="h5" sx={{
                         fontFamily: "Lato",
