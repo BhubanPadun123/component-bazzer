@@ -356,7 +356,6 @@ export const BPProductRegisterCard: React.FC<BPProductRegisterCardProp> = (props
                     alignItems: "center",
                     gap: "8px",
                     width: "100%",
-                    overflowX:"scroll"
                 }}>
                     <Typography variant="h5" sx={{
                         fontFamily: "Lato",
@@ -410,7 +409,8 @@ export const BPProductRegisterCard: React.FC<BPProductRegisterCardProp> = (props
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
-                        flexDirection: "column"
+                        flexDirection: "column",
+                        overflowX:"scroll",
                     }}>
                         <Typography sx={{
                             fontFamily: "Lato",

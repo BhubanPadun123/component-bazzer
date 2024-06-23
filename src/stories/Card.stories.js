@@ -1,6 +1,6 @@
 import React from "react";
 import {storiesOf} from "@storybook/react"
-import {BPCard,BPCardSecondary} from "../index"
+import {BPCard,BPCardSecondary,ProfileCard} from "../index"
 
 
 const stories = storiesOf("BPCard",module)
@@ -17,5 +17,10 @@ stories.add("BPCardSecondary",()=>{
 
     return(
         <BPCardSecondary />
+    )
+})
+stories.add('ProfileCard',()=>{
+    return(
+        <ProfileCard />
     )
 })

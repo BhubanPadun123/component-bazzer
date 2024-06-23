@@ -8,6 +8,7 @@ import {BPCard,BPCardSecondary} from "./components/Card/index.tsx"
 import {BPTabs} from "./components/Tabs/index.tsx"
 import {BPProductRegisterCard} from "./components/Card/productCard.tsx"
 import {BPPropertyRegisterForm} from "./components/Form/PropertyRegisterForm.tsx"
+import ProfileCard from "./components/Card/PropfileCard.tsx"
 
 
 export {
@@ -19,6 +20,7 @@ export {
     BPCard,
     BPCardSecondary,
     BPProductRegisterCard,
-    BPPropertyRegisterForm
+    BPPropertyRegisterForm,
+    ProfileCard
 }
 
